@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Cyber Swa Raksha</title>
+    <link rel="stylesheet" href="new_index.css">
+    <style>
+        /* Add your custom CSS styles here */
+    </style>
+</head>
+
+<body>
+    <!-- Background canvas -->
+    <canvas id="gradientCanvas"></canvas>
+    
+    <!-- Floating cybersecurity icons -->
+    <div class="floating-icon icon-shield"><i class="fas fa-shield-alt"></i></div>
+    <div class="floating-icon icon-lock"><i class="fas fa-lock"></i></div>
+    <div class="floating-icon icon-warning"><i class="fas fa-exclamation-triangle"></i></div>
+    <div class="floating-icon icon-cpu"><i class="fas fa-microchip"></i></div>
+    <div class="floating-icon icon-wifi"><i class="fas fa-wifi"></i></div>
+    <div class="floating-icon icon-database"><i class="fas fa-database"></i></div>
+    
+    <!-- Main title with animation -->
+    <h1 class="main-title">Welcome to <span class="highlight">Cyber Swa Raksha</span> Game</h1>
+    
+    <!-- Subtitle with typing effect -->
+    <h2 id="greeting" class="subtitle"></h2>
+    
+    <!-- Main container with glassmorphism -->
+    <div class="container" id="gameContainer">
+        <div class="glow-border"></div>
+        <div class="level-badge">Level-1</div>
+        <h4 class="level-title">Spot the Phish</h4>
+       
+        <button id="startButton" class="btn btn-primary">
+            <span class="btn-text">Start Challenge</span>
+            <i class="fas fa-arrow-right btn-icon"></i>
+        </button>
+        
+        <div class="pulse-ring"></div>
+        <div id="videoContainer" style="display: none;">
+            <video id="gameVideo" controls>
+                <source src="/Videos/Eng.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+    </div>
+    
+    <!-- Particles container -->
+    <div id="particles-container"></div>
+
+    <script>
+        // Get elements
+        const startButton = document.getElementById('startButton');
+        const gameAudio = document.getElementById('gameAudio');
+        const videoContainer = document.getElementById('videoContainer');
+        const gameVideo = document.getElementById('gameVideo');
+
+        // Start button click handler
+        startButton.addEventListener('click', () => {
+            // Hide the start button
+            startButton.style.display = 'none';
+
+            // Show video container and start playing video
+            videoContainer.style.display = 'block';
+            gameAudio.pause(); // Pause the audio if playing
+            gameVideo.play();
+
+            // Check if video is ready to play (check for errors)
+            gameVideo.onerror = function() {
+                alert('Error playing the video. Please check the file path.');
+            };
+
+            // When the video ends, show the challenge started message
+            gameVideo.addEventListener('ended', () => {
+                alert('Challenge Started! You\'re now playing Level 2. Good luck!');
+                // Optionally redirect or show next level logic here
+                // window.location.href = '/nextLevel';  // Or any other action you want
+            });
+        });
+    </script>
+
+    <script src="level_2.js"></script>
+</body>
+
+</html>

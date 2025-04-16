@@ -1,0 +1,399 @@
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Canvas for background */
+#gradientCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+/* Container for main content */
+.container {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Typography */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #e4e4e4;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #ccc;
+}
+
+/* Typing animation */
+.typed-text {
+    font-weight: bold;
+    color: #e4e4e4;
+}
+
+.cursor {
+    display: inline-block;
+    width: 3px;
+    background-color: #ccc;
+    margin-left: 0.1rem;
+    animation: blink 1s infinite;
+}
+
+.cursor.typing {
+    animation: none;
+}
+
+@keyframes blink {
+    0% { background-color: #ccc; }
+    49% { background-color: #ccc; }
+    50% { background-color: transparent; }
+    99% { background-color: transparent; }
+    100% { background-color: #ccc; }
+}
+
+/* Scoreboard */
+.scoreboard {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(100, 200, 255, 0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scoreboard h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.scoreboard #score {
+    color: #4cc9f0;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #333;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, #0066ff, #00ccff);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 1s ease;
+}
+
+/* Level grid */
+.level-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.level-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 1.5rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.level-card:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.level-card.completed {
+    border-color: rgba(0, 255, 0, 0.5);
+}
+
+.level-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.level-number {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.level-badge {
+    background: rgba(0, 255, 0, 0.2);
+    color: #4ade80;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+}
+
+.level-title {
+    font-size: 1.25rem;
+    color: #4cc9f0;
+    margin-bottom: 0.5rem;
+}
+
+.level-description {
+    font-size: 0.875rem;
+    color: #ccc;
+    margin-bottom: 1rem;
+}
+
+.level-button {
+    width: 100%;
+    background-color: #0047ab;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.level-button:hover {
+    background-color: #0056d6;
+}
+
+.level-button.completed {
+    background-color: #059669;
+}
+
+.level-button.completed:hover {
+    background-color: #047857;
+}
+
+/* Glow effect for unplayed levels */
+.glow-effect {
+    position: absolute;
+    inset: -1px;
+    background: rgba(0, 100, 255, 0.2);
+    border-radius: 10px;
+    filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.5s;
+    animation: pulse-slow 3s ease-in-out infinite;
+    z-index: -1;
+}
+
+.level-card:hover .glow-effect {
+    opacity: 1;
+}
+
+/* Floating icons */
+.floating-icon {
+    position: fixed;
+    z-index: 5;
+    color: rgba(100, 200, 255, 0.7);
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.5));
+}
+
+.icon-shield {
+    top: 10%;
+    left: 5%;
+    animation: float-slow 6s ease-in-out infinite;
+}
+
+.icon-lock {
+    top: 15%;
+    right: 5%;
+    animation: float-medium 4s ease-in-out infinite;
+}
+
+.icon-warning {
+    bottom: 15%;
+    left: 5%;
+    animation: float-fast 5s ease-in-out infinite;
+}
+
+.icon-cpu {
+    bottom: 10%;
+    right: 5%;
+    animation: float-slow 7s ease-in-out infinite;
+}
+
+.icon-wifi {
+    top: 30%;
+    left: 15%;
+    animation: float-medium 5s ease-in-out infinite;
+}
+
+.icon-database {
+    bottom: 30%;
+    right: 15%;
+    animation: float-fast 6s ease-in-out infinite;
+}
+
+/* Side panel */
+.side-panel {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+}
+
+.side-panel-content {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    padding: 1rem;
+    width: 200px;
+    box-shadow: 0 0 15px rgba(100, 200, 255, 0.2);
+}
+
+.side-panel h3 {
+    font-size: 1.25rem;
+    color: #4cc9f0;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.achievement-badge {
+    background: rgba(0, 100, 255, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(0, 100, 255, 0.3);
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+}
+
+.empty-achievements {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+/* Achievement notification */
+.achievement-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    animation: slide-down 3s ease-in-out forwards;
+}
+
+.notification-content {
+    background: linear-gradient(to right, rgba(37, 99, 235, 0.8), rgba(124, 58, 237, 0.8));
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 0 15px rgba(100, 200, 255, 0.3);
+}
+
+.notification-content i {
+    color: #fde047;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Animations */
+@keyframes float-slow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(5deg); }
+}
+
+@keyframes float-medium {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(-5deg); }
+}
+
+@keyframes float-fast {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(8deg); }
+}
+
+@keyframes pulse-slow {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.3; }
+}
+
+@keyframes slide-down {
+    0% { transform: translate(-50%, -50px); opacity: 0; }
+    10% { transform: translate(-50%, 0); opacity: 1; }
+    90% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, -50px); opacity: 0; }
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 900px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .level-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    .container {
+        padding: 1rem;
+    }
+    .level-grid {
+        grid-template-columns: 1fr;
+    }
+    .side-panel {
+        display: none;
+    }
+    .floating-icon {
+        font-size: 1.5rem;
+    }
+}

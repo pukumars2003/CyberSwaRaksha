@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Candy Clash - Game Level</title>
+
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <video autoplay muted loop playsinline>
+        <source src="/static/videoplayback.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="container">
+        <h1><span class="typed-text"></span><span class="cursor">&nbsp;</span></h1>
+        <p>Match your way through the cybersecurity challenges!</p>
+
+        <div class="scoreboard">
+            <h2>Score: <span id="score">0</span></h2>
+        </div>
+
+        <div class="level-grid">
+            <div class="level" id="level1" onclick="completeLevel(1)">
+                <h2>1</h2>
+                <p>Phishing Tutorial</p>
+                <button id="button1" onclick="playLevel(1)">Play</button>
+                <span class="status"></span>
+            </div>
+            <div class="level" id="level2" onclick="completeLevel(2)">
+                <h2>2</h2>
+                <p>Spot the Phish</p>
+                <button id="button2" onclick="playLevel(2)">Play</button>
+                <span class="status"></span>
+            </div>
+            <div class="level" id="level3" onclick="completeLevel(3)">
+                <h2>3</h2>
+                <p>Ransomware Tutorial</p>
+                <button id="button3" onclick="playLevel(3)">Play</button>
+                <span class="status"></span>
+            </div>
+            <div class="level" id="level4" onclick="completeLevel(4)">
+                <h2>4</h2>
+                <p>Decrypt the Threat</p>
+                <button id="button4" onclick="playLevel(4)">Play</button>
+                <span class="status"></span>
+            </div>
+            <div class="level" id="level5" onclick="completeLevel(5)">
+                <h2>5</h2>
+                <p>Spot the Fake Call</p>
+                <button id="button5" onclick="playLevel(5)">Play</button>
+                <span class="status"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio for greeting -->
+    <audio id="greeting-audio" src="greeting.mp3" preload="auto"></audio>
+    <audio id="level-audio1" src="Intro Kannda.mp3" preload="auto"></audio>
+    <audio id="level-audio2" src="level2-intro.mp3" preload="auto"></audio>
+    <audio id="level-audio3" src="Intro Kannda.mp3" preload="auto"></audio>
+    <audio id="level-audio4" src="level4-intro.mp3" preload="auto"></audio>
+    <audio id="level-audio5" src="level5-intro.mp3" preload="auto"></audio>
+
+    <script src="/static/script.js"></script>
+
+    <script>
+        const typedTextSpan = document.querySelector(".typed-text");
+        const cursorSpan = document.querySelector(".cursor");
+
+        const textArray = ["Escape From Cyber Thieves", "साइबर चोरों से बचें", "ಸೈಬರ್ ಕಳ್ಳನಿಂದ ತಪಿಸಿಕೊಳ್ಳಿ", "సైబర్ దొంగల నుంచి తప్పించుకోండి", "சைபர் திருடர்களிடம் இருந்து தப்பிக்க"];
+        const typingDelay = 100;
+        const erasingDelay = 50;
+        const newTextDelay = 1000; // Delay between current and next text
+        let textArrayIndex = 0;
+        let charIndex = 0;
+
+        function type() {
+            if (charIndex < textArray[textArrayIndex].length) {
+                if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+                typedTextSpan.textContent += textArray[textArrayIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, typingDelay);
+            } else {
+                cursorSpan.classList.remove("typing");
+                setTimeout(erase, newTextDelay);
+            }
+        }
+
+        function erase() {
+            if (charIndex > 0) {
+                if (!cursorSpan.classList.contains("typing")) cursorSpan.classList.add("typing");
+                typedTextSpan.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, erasingDelay);
+            } else {
+                cursorSpan.classList.remove("typing");
+                textArrayIndex++;
+                if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+                setTimeout(type, typingDelay + 1100);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            if (textArray.length) setTimeout(type, newTextDelay + 250);
+        });
+
+        function playLevel(level) {
+            const greetingAudio = document.getElementById('greeting-audio');
+            const levelAudio = document.getElementById(`level-audio${level}`); // Use template literal to select audio
+
+            // Play greeting audio
+            greetingAudio.play().catch((error) => {
+                console.error("Greeting audio playback failed:", error);
+            });
+
+            // Play level-specific audio
+            levelAudio.play().catch((error) => {
+                console.error("Level audio playback failed:", error);
+            });
+
+            // Redirect to the corresponding level page after 6 seconds
+            setTimeout(() => {
+                let levelPath = ""; // Initialize the variable to hold the level path
+
+                switch (level) {
+                    case 1:
+                        levelPath = "Level-1/index.html";
+                        break;
+                    case 2:
+                        levelPath = "whatsapp.html";
+                        break;
+                    case 3:
+                        levelPath = "Level-3/index.html";
+                        break;
+                    case 4:
+                        levelPath = "Level-4/index.html";
+                        break;
+                    case 5:
+                        levelPath = "Level-5/index.html";
+                        break;
+                    default:
+                        alert("Level " + level + " is not available yet.");
+                        return; // Exit the function if level is not valid
+                }
+
+                // Redirect after 2 seconds delay for the level page redirect
+                setTimeout(() => {
+                    window.location.href = levelPath; // Redirect to the appropriate level
+                }, 2000); // 2 seconds delay for the level page redirect
+
+            }, 6000); // 6 seconds delay for greeting audio
+        }
+
+        function completeLevel(level) {
+            // Mark the level as complete or update the status
+            document.getElementById('button' + level).textContent = "Completed";
+            document.getElementById('button' + level).disabled = true;
+        }
+    </script>
+</body>
+
+</html>

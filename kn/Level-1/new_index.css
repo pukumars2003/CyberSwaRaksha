@@ -1,0 +1,99 @@
+body {
+    background-color: black;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    flex-direction: column; /* Allow for vertical stacking */
+}
+
+.container {
+    text-align: center;
+    color: white;
+    z-index: 2;
+    position: relative;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    position: absolute; /* Keep absolute positioning */
+    top: 5%; /* Position at the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    white-space: nowrap; /* Prevent line breaks */
+    font-size: 5vw; /* Make font size responsive */
+}
+#greeting {
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+.form-control,
+.btn {
+    border-radius: 30px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: rgb(34, 43, 122);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#gradientCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.h2 {
+    margin-bottom: 25px;
+    position: absolute; /* Keep absolute positioning */
+    top: 10%; /* Adjust for spacing */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    color: rgb(0, 81, 255);
+    font-weight: bolder;
+    white-space: nowrap; /* Prevent line breaks */
+    font-size: 4vw; /* Make font size responsive */
+}
+
+
+/* Media Query for smaller screens */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 5vw; /* Increase font size for smaller screens */
+    }
+
+    .h2 {
+        font-size: 3vw; /* Increase font size for smaller screens */
+    }
+
+    .container {
+        padding: 20px; /* Reduce padding on small screens */
+    }
+}

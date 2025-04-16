@@ -1,0 +1,54 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-search {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-search:hover {
+    background-color: #0056b3;
+}
+
+.map-container {
+    height: 400px; /* Ensure the map has a height */
+    width: 100%;
+}
+
+.results-container {
+    margin-top: 20px;
+}
+
+.alert-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.alert-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.table th {
+    width: 30%;
+}
+
+.row-equal {
+    display: flex;
+}
+
+.col-equal {
+    flex: 1;
+    padding: 10px;
+}

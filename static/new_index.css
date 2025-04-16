@@ -1,0 +1,471 @@
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+    flex-direction: column;
+    color: white;
+}
+
+/* Canvas for background */
+#gradientCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+.container {
+    text-align: center;
+    color: white;
+    z-index: 2;
+    position: relative;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+}
+.container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Glow border effect */
+.glow-border {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    z-index: -1;
+    border-radius: 22px;
+    background: linear-gradient(45deg,
+            rgba(0, 183, 255, 0.5),
+            rgba(0, 0, 255, 0.2),
+            rgba(128, 0, 255, 0.5),
+            rgba(0, 183, 255, 0.5));
+    background-size: 400% 400%;
+    animation: glowBorder 10s ease infinite;
+    filter: blur(10px);
+    opacity: 0.7;
+}
+
+@keyframes glowBorder {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Pulse ring animation */
+.pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    border: 2px solid rgba(0, 183, 255, 0.3);
+    animation: pulse 2s infinite;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
+    }
+
+    70% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
+    }
+}
+
+/* Main title */
+.main-title {
+    margin-bottom: 20px;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(255, 255, 255);
+    font-weight: bolder;
+    white-space: nowrap;
+    font-size: 5vw;
+    text-shadow: 0 0 10px rgba(0, 183, 255, 0.7);
+    animation: fadeInDown 1.5s ease-out;
+    z-index: 2;
+}
+
+.highlight {
+    color: #4cc9f0;
+    position: relative;
+    display: inline-block;
+}
+
+.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #4cc9f0, transparent);
+    animation: highlightGlow 2s infinite;
+}
+
+@keyframes highlightGlow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Subtitle */
+.subtitle {
+    margin-bottom: 25px;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(180, 180, 255);
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 3vw;
+    opacity: 0;
+    animation: fadeIn 2s ease-out 1s forwards;
+    z-index: 2;
+}
+
+/* Level badge */
+.level-badge {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, #0047ab, #4cc9f0);
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(76, 201, 240, 0.5);
+    z-index: 3;
+}
+
+/* Style for video container (larger like YouTube) */
+#videoContainer {
+    display: none;
+    text-align: center;
+    width: max-content;
+    max-width: 100%;
+    /* Ensure full width */
+    margin: 20px auto;
+    /* Center the container */
+}
+
+#gameVideo {
+    width: 80%;
+    /* You can adjust this value to make the video as large as you want */
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
+/* Level title */
+.level-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    color: #4cc9f0;
+    text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+    animation: pulseText 2s infinite;
+}
+
+@keyframes pulseText {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+    }
+
+    50% {
+        text-shadow: 0 0 20px rgba(76, 201, 240, 0.8);
+    }
+}
+
+/* Level description */
+.level-description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #e0e0ff;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 1.5s forwards;
+}
+
+/* Button styling */
+.btn-primary {
+    background: linear-gradient(45deg, #0047ab, #4cc9f0);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(76, 201, 240, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: auto;
+    margin: 0 auto;
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(76, 201, 240, 0.8);
+    background: linear-gradient(45deg, #4cc9f0, #0047ab);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-icon {
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover .btn-icon {
+    transform: translateX(5px);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.7s ease;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+/* Floating icons */
+.floating-icon {
+    position: fixed;
+    z-index: 1;
+    color: rgba(100, 200, 255, 0.7);
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.5));
+}
+
+.icon-shield {
+    top: 10%;
+    left: 5%;
+    animation: float-slow 6s ease-in-out infinite;
+}
+
+.icon-lock {
+    top: 15%;
+    right: 5%;
+    animation: float-medium 4s ease-in-out infinite;
+}
+
+.icon-warning {
+    bottom: 15%;
+    left: 5%;
+    animation: float-fast 5s ease-in-out infinite;
+}
+
+.icon-cpu {
+    bottom: 10%;
+    right: 5%;
+    animation: float-slow 7s ease-in-out infinite;
+}
+
+.icon-wifi {
+    top: 30%;
+    left: 15%;
+    animation: float-medium 5s ease-in-out infinite;
+}
+
+.icon-database {
+    bottom: 30%;
+    right: 15%;
+    animation: float-fast 6s ease-in-out infinite;
+}
+
+/* Particles container */
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes float-slow {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(5deg);
+    }
+}
+
+@keyframes float-medium {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(-5deg);
+    }
+}
+
+@keyframes float-fast {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(8deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 7vw;
+    }
+
+    .subtitle {
+        font-size: 4vw;
+        top: 18%;
+    }
+
+    .container {
+        padding: 30px 20px;
+        margin-top: 100px;
+    }
+
+    .level-title {
+        font-size: 2rem;
+    }
+
+    .level-description {
+        font-size: 1rem;
+    }
+
+    .floating-icon {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 8vw;
+        white-space: normal;
+        text-align: center;
+        width: 90%;
+    }
+
+    .subtitle {
+        font-size: 5vw;
+        top: 22%;
+        white-space: normal;
+        text-align: center;
+        width: 90%;
+    }
+
+    .container {
+        margin-top: 150px;
+    }
+}

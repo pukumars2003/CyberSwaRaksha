@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Swa Raksha</title>
+    <link rel="stylesheet" href="/static/game_level.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Canvas for background animations -->
+    <canvas id="gradientCanvas"></canvas>
+
+    <!-- Floating cybersecurity icons -->
+    <div class="floating-icon icon-shield"><i class="fas fa-shield-alt"></i></div>
+    <div class="floating-icon icon-lock"><i class="fas fa-lock"></i></div>
+    <div class="floating-icon icon-warning"><i class="fas fa-exclamation-triangle"></i></div>
+    <div class="floating-icon icon-cpu"><i class="fas fa-microchip"></i></div>
+    <div class="floating-icon icon-wifi"><i class="fas fa-wifi"></i></div>
+    <div class="floating-icon icon-database"><i class="fas fa-database"></i></div>
+
+    <!-- Side panel with achievements -->
+    <div class="side-panel">
+        <div class="side-panel-content">
+            <h3>Achievements</h3>
+            <div id="achievements-container">
+                <p class="empty-achievements">Complete levels to earn achievements</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Achievement notification -->
+    <div id="achievement-notification" class="achievement-notification hidden">
+        <div class="notification-content">
+            <i class="fas fa-file-exclamation"></i>
+            <p id="achievement-text"></p>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="container">
+        <h1>
+            <span class="typed-text"></span><span class="cursor">&nbsp;</span>
+        </h1>
+        <p class="subtitle">Match your way through the cybersecurity challenges!</p>
+
+        <div class="scoreboard">
+            <h2>Score: <span id="score">0</span></h2>
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+        </div>
+
+        <div class="level-grid" id="level-grid">
+            <!-- Levels will be added dynamically via JavaScript -->
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="greeting-audio" src="Intro hindi.mp3" preload="auto"></audio>
+    <audio id="level-audio1" src="Intro English.mp3" preload="auto"></audio>
+    
+
+    <script src="/static/Game_level.js"></script>
+</body>
+</html>

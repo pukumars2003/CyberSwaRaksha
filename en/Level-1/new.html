@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Cyber Sva Raksha</title>
+    <link rel="stylesheet" href="/static/new_index.css">
+    <style>
+        .container {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .container.visible {
+            opacity: 1;
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="gradientCanvas"></canvas>
+    <h1>Welcome to Cyber Sva Raksha Game</h1>
+    <h2 id="greeting"></h2>
+
+    <div class="container" id="gameContainer">
+        <h3>Level-2</h3>
+        <button id="startButton" class="btn btn-primary">Start</button>
+        <audio id="gameAudio" src="./audio/level-2 English.mp3"></audio>
+    </div>
+
+    <script src="level_2.js">
+       
+    </script>
+
+    
+
+</body>
+
+</html>

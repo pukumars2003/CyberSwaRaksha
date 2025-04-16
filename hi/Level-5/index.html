@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Quiz App</title>
+</head>
+
+<body>
+  <audio id="quiz-audio" src="audio/music.mp3" loop></audio>
+  
+
+
+  <script>
+    // Play audio on first user interaction
+    document.addEventListener('click', function () {
+      var audio = document.getElementById('quiz-audio');
+      audio.play().catch(function (error) {
+        console.log("Audio play failed: ", error);
+      });
+    });
+  </script>
+
+  <!-- QUIZ ONE -->
+  <section class="section-1" id="section-1">
+  
+    <main>
+      <div class="text-container">
+        <h3>Cyber Sva Raksha Quiz</h3>
+        <p>QUESTION 1 OF 10</p>
+        <p>What does "phishing" mean?</p>
+      </div>
+      <form>
+        <div class="quiz-options">
+          <input type="radio" class="input-radio one-a" id="one-a" name="yes-1" required>
+          <label class="radio-label" for="one-a">
+            <span class="alphabet">A</span> Catching fish
+          </label>
+          <input type="radio" class="input-radio one-b" id="one-b" name="yes-1">
+          <label class="radio-label" for="one-b">
+            <span class="alphabet">B</span> Trying to trick you into giving away personal information
+          </label>
+          <input type="radio" class="input-radio one-c" id="one-c" name="yes-1">
+          <label class="radio-label" for="one-c">
+            <span class="alphabet">C</span> Using secure websites
+          </label>
+        </div>
+        <a id="btn" type="submit" onclick="window.location.href='#section-2'">Next</a>
+      </form>
+    </main>
+  </section>
+
+  <!-- QUIZ TWO -->
+  <section class="section-2" id="section-2">
+    <main>
+      <div class="text-container">
+        <h3>Cyber Sva Raksha Quiz</h3>
+        <p>QUESTION 2 OF 10</p>
+        <p>Which of the following is safer to use when entering personal information online?</p>
+      </div>
+      <form>
+        <div class="quiz-options">
+          <input type="radio" class="input-radio two-a" id="two-a" name="no-2" required="">
+          <label class="radio-label" for="two-a">
+            <span class="alphabet">A</span> https://example.com
+          </label>
+          <input type="radio" class="input-radio two-b" id="two-b" name="no-2" required="">
+          <label class="radio-label" for="two-b">
+            <span class="alphabet">B</span> http://example.com
+          </label>
+          <input type="radio" class="input-radio two-c" id="two-c" name="no-2" required="">
+          <label class="radio-label" for="two-c">
+            <span class="alphabet">C</span>  ftp://example.com
+          </label>
+        </div>
+        <a id="btn" type="submit" onclick="window.location.href='#section-3'">Next</a>
+      </form>
+    </main>
+  </section>
+
+  <!-- QUIZ THREE -->
+  <section class="section-3" id="section-3">
+    <main>
+      <div class="text-container">
+        <h3>Cyber Sva Raksha Quiz</h3>
+        <p>QUESTION 3 OF 10</p>
+        <p>What is a common sign of a fake stock market scheme?</p>
+      </div>
+      <form>
+        <div class="quiz-options">
+          <input type="radio" class="input-radio three-a" id="three-a" name="no-3" required="">
+          <label class="radio-label" for="three-a">
+            <span class="alphabet">A</span> Promises of guaranteed high returns with little risk
+          </label>
+          <input type="radio" class="input-radio three-b" id="three-b" name="no-3" required="">
+          <label class="radio-label" for="three-b">
+            <span class="alphabet">B</span> Detailed information about company performance
+          </label>
+          <input type="radio" class="input-radio three-c" id="three-c" name="no-3" required="">
+          <label class="radio-label" for="three-c">
+            <span class="alphabet">C</span> Transparency about fees and charges
+          </label>
+        </div>
+        <a id="btn" type="submit" onclick="window.location.href='#section-4'">Next</a>
+      </form>
+    </main>
+  </section>
+
+  <!-- QUIZ FOUR -->
+  <section class="section-4" id="section-4">
+    <main>
+      <div class="text-container">
+        <h3>Cyber Sva Raksha Quiz</h3>
+        <p>QUESTION 4 OF 10</p>
+        <p>What should you look for in a URL to ensure it’s safe?</p>
+      </div>
+      <form>
+        <div class="quiz-options">
+          <input type="radio" class="input-radio four-a" id="four-a" name="no-4" required="">
+          <label class="radio-label" for="four-a">
+            <span class="alphabet">A</span> The number of images
+          </label>
+          <input type="radio" class="input-radio four-b" id="four-b" name="no-4" required="">
+          <label class="radio-label" for="four-b">
+            <span class="alphabet">B</span> The color of the text
+          </label>
+          <input type="radio" class="input-radio four-c" id="four-c" name="no-4" required="">
+          <label class="radio-label" for="four-c">
+            <span class="alphabet">C</span>  The lock sign
+          </label>
+        </div>
+        <a id="btn" type="submit" onclick="window.location.href='#section-5'">Next</a>
+      </form>
+    </main>
+  </section>
+
+  <!-- QUIZ FIVE -->
+  <section class="section-5" id="section-5">
+    <main>
+      <div class="text-container">
+        <h3>Cyber Sva Raksha Quiz</h3>
+        <p>QUESTION 5 OF 10</p>
+        <p>If you receive a message asking for personal information, what should you do?</p>
+      </div>
+      <form>
+        <div class="quiz-options">
+          <input type="radio" class="input-radio five-a" id="five-a" name="yes-5" required>
+          <label class="radio-label" for="five-a">
+            <span class="alphabet">A</span>  Share the information
+          </label>
+          <input type="radio" class="input-radio five-b" id="five-b" name="yes-5">
+          <label class="radio-label" for="five-b">
+            <span class="alphabet">B</span> Report it to the cybercrime.gov.in portal
+          </label>
+          <input type="radio" class="input-radio five-c" id="five-c" name="yes-5">
+          <label class="radio-label" for="five-c">
+            <span class="alphabet">C</span> Delete the message
+          </label>
+        </div>
+        <a id="btn" type="submit" onclick="window.location.href='#section-6'">Next</a>
+      </form>
+    </main>
+  </section>
+
+  <!-- QUIZ SIX -->
+  <section class="section-6" id="section-6">
+    <main>
+      <div class="text-container">
+        <h3>Cyber Sva Raksha Quiz</h3>
+        <p>QUESTION 6 OF 10</p>
+        <p>What should you do if you receive a call claiming there’s a fake complaint against you?</p>
+      </div>
+      <form>
+        <div class="quiz-options">
+          <input type="radio" class="input-radio six-a" id="six-a" name="yes-6" required>
+          <label class="radio-label" for="six-a">
+            <span class="alphabet">A</span> Panic and respond immediately
+          </label>
+          <input type="radio" class="input-radio six-b" id="six-b" name="yes-6">
+          <label class="radio-label" for="six-b">
+            <span class="alphabet">B</span> Hang up and verify with the authorities
+          </label>
+          <input type="radio" class="input-radio six-c" id="six-c" name="yes-6">
+          <label class="radio-label" for="six-c">
+            <span class="alphabet">C</span> Provide your personal information to resolve the issue
+          </label>
+        </div>
+        <a id="btn" type="submit" onclick="window.location.href='#section-7'">Next</a>
+      </form>
+    </main>
+  </section>
+
+  <!-- QUIZ SEVEN -->
+  <section class="section-7" id="section-7">
+    <main>
+      <div class="text-container">
+        <h3>Cyber Sva Raksha Quiz</h3>
+        <p>QUESTION 7 OF 10</p>
+        <p>What should you do if a website asks for unnecessary permissions, like access to your contacts?</p>
+      </div>
+      <form>
+        <div class="quiz-options">
+          <input type="radio" class="input-radio seven-a" id="seven-a" name="yes-7" required>
+          <label class="radio-label" for="seven-a">
+            <span class="alphabet">A</span> Grant the permissions immediately
+          </label>
+          <input type="radio" class="input-radio seven-b" id="seven-b" name="yes-7">
+          <label class="radio-label" for="seven-b">
+            <span class="alphabet">B</span> Deny the permissions and leave the site
+          <input type="radio" class="input-radio seven-c" id="seven-c" name="yes-7">
+          <label class="radio-label" for="seven-c">
+            <span class="alphabet">C</span> Only allow permissions if the website is familiar
+          </label>
+        </div>
+        <a id="btn" type="submit" onclick="window.location.href='#section-8'">Next</a>
+      </form>
+    </main>
+  </section>
+
+  <!-- QUIZ EIGHT -->
+  <section class="section-8" id="section-8">
+    <main>
+      <div class="text-container">
+        <h3>Cyber Sva Raksha Quiz</h3>
+        <p>QUESTION 8 OF 10</p>
+        <p>What is the helpline number to report cyber crimes in India?</p>
+      </div>
+      <form>
+        <div class="quiz-options">
+          <input type="radio" class="input-radio eight-a" id="eight-a" name="yes-8" required>
+          <label class="radio-label" for="eight-a">
+            <span class="alphabet">A</span> 1930
+          </label>
+          <input type="radio" class="input-radio eight-b" id="eight-b" name="yes-8">
+          <label class="radio-label" for="eight-b">
+            <span class="alphabet">B</span> 100
+          </label>
+          <input type="radio" class="input-radio eight-c" id="eight-c" name="yes-8">
+          <label class="radio-label" for="eight-c">
+            <span class="alphabet">C</span> 155260
+          </label>
+        </div>
+        <a id="btn" type="submit" onclick="window.location.href='#game-over'">Finish</a>
+      </form>
+    </main>
+  </section>
+
+  
+ 
+
+  <div class="score-counter">
+    <p class="score-text">CORRECT:</p>
+  </div>
+
+  <!-- GAME OVER PAGE -->
+  <section id="game-over">
+    <div class="game-over-content">
+      <div class="over-text-cont">
+        <h1 data-heading="Game Over">Game Over</h1>
+        <h2>Total Score:</h2>
+        <a id="btn" type="submit" onclick="window.location.href='#refresh'">Play Again</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFRESH PAGE SECTION -->
+  <section id="refresh">
+    <div class="refresh-content">
+      <svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 341.12 341.33">
+        <defs>
+          <style>
+            .cls-1 {
+              fill: #fff;
+            }
+          </style>
+        </defs>
+        <title>multimedia2</title>
+        <path class="cls-1"
+          d="M341.23,149.33V0L291.09,50.13A169.56,169.56,0,0,0,170.56,0C76.27,0,.11,76.37.11,170.67S76.27,341.33,170.56,341.33c79.47,0,146-54.4,164.91-128H291.09A127.94,127.94,0,1,1,170.56,42.67c35.31,0,67,14.72,90.13,37.86l-68.8,68.8Z"
+          transform="translate(-0.11)" />
+      </svg>
+      <h2>Refresh/Reload this page to continue</h2>
+    </div>
+  </section>
+  <script src="level_2.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Cyber Sva Raksha</title>
+    <link rel="stylesheet" href="./new_index.css">
+    <style>
+        .container {
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .container.visible {
+            opacity: 1;
+        }
+
+        /* Style for video container (larger like YouTube) */
+        #videoContainer {
+            display: none;
+            text-align: center;
+            width: max-content;
+            max-width: 100%; /* Ensure full width */
+            margin: 20px auto; /* Center the container */
+        }
+
+        #gameVideo {
+            width: 80%; /* You can adjust this value to make the video as large as you want */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="gradientCanvas"></canvas>
+    <h1>Welcome to Cyber Sva Raksha Game</h1>
+    <h2 id="greeting"></h2>
+
+    <div class="container" id="gameContainer">
+        <h3>Level-1</h3>
+        <button id="startButton" class="btn btn-primary">Start</button>
+        
+        <div id="videoContainer">
+            <video id="gameVideo" controls>
+                <source src="Videos/Hindi.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        // Get elements
+        const startButton = document.getElementById('startButton');
+        const gameAudio = document.getElementById('gameAudio');
+        const videoContainer = document.getElementById('videoContainer');
+        const gameVideo = document.getElementById('gameVideo');
+
+        // Start button click handler
+        startButton.addEventListener('click', () => {
+            // Hide the start button
+            startButton.style.display = 'none';
+
+            // Show video container and start playing video
+            videoContainer.style.display = 'block';
+            gameAudio.pause(); // Pause the audio if playing
+            gameVideo.play();
+
+            // Check if video is ready to play (check for errors)
+            gameVideo.onerror = function() {
+                alert('Error playing the video. Please check the file path.');
+            };
+
+            // When the video ends, navigate to the next level
+            gameVideo.addEventListener('ended', () => {
+                alert('Video has ended. Moving to the next level!');
+                // Redirect or show the next level (implement your next level logic here)
+                window.location.href = '/nextLevel';  // Or any other action you want
+            });
+        });
+    </script>
+  <script src="level_2.js">
+       
+  </script>
+</body>
+
+</html>

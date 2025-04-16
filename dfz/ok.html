@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Cyber Swa Raksha</title>
+    <link rel="stylesheet" href="./new_index.css">
+    <style>
+        /* Insert the CSS you provided here... */
+        /* Here are the necessary styles from your provided CSS. */
+        
+        /* Canvas for background */
+        #gradientCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+        }
+
+        /* Main container */
+        .container {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in, transform 1s ease-out;
+            overflow: hidden;
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glow border effect */
+        .glow-border {
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            border-radius: 22px;
+            background: linear-gradient(45deg, 
+                rgba(0, 183, 255, 0.5), 
+                rgba(0, 0, 255, 0.2), 
+                rgba(128, 0, 255, 0.5), 
+                rgba(0, 183, 255, 0.5));
+            background-size: 400% 400%;
+            animation: glowBorder 10s ease infinite;
+            filter: blur(10px);
+            opacity: 0.7;
+        }
+
+        @keyframes glowBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Pulse ring animation */
+        .pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 183, 255, 0.3);
+            animation: pulse 2s infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.7;
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1.05);
+                opacity: 0.2;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.7;
+            }
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background: linear-gradient(45deg, #0047ab, #4cc9f0);
+            border: none;
+            border-radius: 30px;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(76, 201, 240, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: auto;
+            margin: 0 auto;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(76, 201, 240, 0.8);
+            background: linear-gradient(45deg, #4cc9f0, #0047ab);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-icon {
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover .btn-icon {
+            transform: translateX(5px);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        /* Floating icons */
+        .floating-icon {
+            position: fixed;
+            z-index: 1;
+            color: rgba(100, 200, 255, 0.7);
+            font-size: 2rem;
+            filter: drop-shadow(0 0 10px rgba(100, 200, 255, 0.5));
+        }
+
+        .icon-shield {
+            top: 10%;
+            left: 5%;
+            animation: float-slow 6s ease-in-out infinite;
+        }
+
+        .icon-lock {
+            top: 15%;
+            right: 5%;
+            animation: float-medium 4s ease-in-out infinite;
+        }
+
+        .icon-warning {
+            bottom: 15%;
+            left: 5%;
+            animation: float-fast 5s ease-in-out infinite;
+        }
+
+        .icon-cpu {
+            bottom: 10%;
+            right: 5%;
+            animation: float-slow 7s ease-in-out infinite;
+        }
+
+        .icon-wifi {
+            top: 30%;
+            left: 15%;
+            animation: float-medium 5s ease-in-out infinite;
+        }
+
+        .icon-database {
+            bottom: 30%;
+            right: 15%;
+            animation: float-fast 6s ease-in-out infinite;
+        }
+
+        /* Particles container */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        @keyframes float-medium {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(-5deg); }
+        }
+
+        @keyframes float-fast {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(8deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Canvas -->
+    <canvas id="gradientCanvas"></canvas>
+
+    <!-- Main Title -->
+    <h1>Welcome to Cyber Sva Raksha Game</h1>
+    <h2 id="greeting"></h2>
+
+    <!-- Game Container -->
+    <div class="container" id="gameContainer">
+        <h3>Level-1</h3>
+        <button id="startButton" class="btn btn-primary">
+            <span class="btn-text">Start</span>
+        </button>
+        
+        <div id="videoContainer">
+            <video id="gameVideo" controls>
+                <source src="/Videos/Eng.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <div id="particles-container"></div>
+
+    <!-- Audio element (hidden, just for sound effects) -->
+    <audio id="gameAudio" src="/audio/gameIntro.mp3"></audio>
+
+    <script>
+        // Canvas setup
+        const canvas = document.getElementById('gradientCanvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        // Resize canvas on window resize
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        // Show the container with a fade-in effect
+        document.addEventListener("DOMContentLoaded", function () {
+            const container = document.getElementById('gameContainer');
+            container.classList.add('visible');
+            
+            // Start typing animation for greeting
+            typeWriter("Prepare to test your cybersecurity knowledge!", 0);
+            
+            // Create particles
+            createParticles();
+        });
+
+        // Typing animation for greeting
+        function typeWriter(text, i) {
+            const greeting = document.getElementById('greeting');
+            const speed = 50; // typing speed in milliseconds
+            
+            if (i < text.length) {
+                greeting.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(function() {
+                    typeWriter(text, i);
+                }, speed);
+            }
+        }
+
+        // Start button click handler
+        document.getElementById('startButton').addEventListener('click', function () {
+            // Play the audio
+            const audio = document.getElementById('gameAudio');
+            
+            // Add button click animation
+            this.classList.add('clicked');
+            
+            // Play audio with error handling
+            audio.play().catch((error) => {
+                console.error('Audio playback failed:', error);
+            });
+            
+            // Simulate loading with button text change
+            const btnText = document.querySelector('.btn-text');
+            const originalText = btnText.textContent;
+            btnText.textContent = "Loading...";
+
+            // Redirect after audio plays or after a timeout
+            setTimeout(() => {
+                btnText.textContent = originalText;
+                this.classList.remove('clicked');
+                
+                // Show success message and next level details
+                const container = document.getElementById('gameContainer');
+                container.innerHTML = `
+                    <div class="level-badge">Level-2</div>
+                    <h3 class="level-title">Challenge Started!</h3>
+                    <p class="level-description">You're now playing Level 2. Good luck!</p>
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle" style="font-size: 3rem; color: #4ade80;"></i>
+                    </div>
+                `;
+            }, 3000);
+        });
+
+        // Gradient points for background animation
+        const points = [
+            { x: 100, y: 300, color: 'rgba(34, 43, 122, 0.8)', radius: 400, dx: 1, dy: 1.2 },
+            { x: 300, y: 600, color: 'rgba(174, 227, 255, 0.5)', radius: 500, dx: 1, dy: 1.2 },
+            { x: 800, y: 400, color: 'rgba(174, 141, 255, 0.5)', radius: 350, dx: 0.5, dy: 1.3 },
+        ];
+
+        function drawBackground() {
+            ctx.clearRect(0, 0, width, height);
+
+            points.forEach(point => {
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, point.radius, 0, 2 * Math.PI);
+                ctx.fillStyle = point.color;
+                ctx.fill();
+                
+                point.x += point.dx;
+                point.y += point.dy;
+
+                if (point.x < 0 || point.x > width) point.dx = -point.dx;
+                if (point.y < 0 || point.y > height) point.dy = -point.dy;
+            });
+
+            requestAnimationFrame(drawBackground);
+        }
+        drawBackground();
+
+        // Particle effect generation
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            
+            for (let i = 0; i < 100; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.width = `${Math.random() * 5 + 2}px`;
+                particle.style.height = particle.style.width;
+                particle.style.top = `${Math.random() * height}px`;
+                particle.style.left = `${Math.random() * width}px`;
+                particle.style.animation = `moveParticle ${Math.random() * 10 + 5}s linear infinite`;
+
+                container.appendChild(particle);
+            }
+        }
+    </script>
+</body>
+</html>

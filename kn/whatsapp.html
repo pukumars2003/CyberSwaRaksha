@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/what.css" />
+  <title>Whatsapp Web (Clone)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .tutorial-box {
+      position: absolute;
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      max-width: 250px;
+      display: none;
+      /* Hidden by default */
+      z-index: 1000;
+      /* Ensure it’s above other content */
+      text-align: center;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .highlight {
+      border: 2px solid yellow;
+      /* Highlight effect */
+      background-color: rgba(255, 255, 0, 0.2);
+      /* Highlight background */
+    }
+    /* Modal styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1001; /* Above tutorial box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 8px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="container d-grid hidden">
+      <section class="aside">
+        <header class="aside__tools">
+          <section class="aside__top flex">
+            <div class="aside__circles">
+              <div class="d-flex">
+                <div class="aside__circle-red"></div>
+                <div class="aside__circle-yellow"></div>
+                <div class="aside__circle-green"></div>
+              </div>
+            </div>
+            <div class="aside__icons flex">
+              <i class="material-icons material-symbols-rounded">
+                radio_button_checked
+              </i>
+              <i class="material-icons material-symbols-rounded">chat</i>
+              <i class="material-icons material-symbols-rounded">sort</i>
+            </div>
+            <div class="profile-block flex">
+              <div class="hidden">
+                <img src=" static/assets/images/Avatar/10.jpg" alt="" />
+              </div>
+            </div>
+          </section>
+          <section class="aside__search">
+            <input class="aside__search-input" type="text" placeholder="Search or start new chat" />
+            <span class="material-icons material-symbols-rounded">
+              search
+            </span>
+          </section>
+        </header>
+        <main class="aside__messages">
+          <section class="aside__message-box flex transition">
+            <div class="profile-block flex">
+              <div class="hidden">
+                <img src=" /static/assets/images/Avatar/Pi7_Tool_iron-man-marvel-comics-.jpg" alt="" />
+              </div>
+            </div>
+            <div class="aside__details">
+              <h3 class="aside__details-name">
+                <strong><a href="mobile.html" class="tutorial-target" id="ironman-link">Iron Man</a></strong>
+              </h3>
+              <p class="aside__details-msg hidden">
+                <a href="mobile.html">Hi ! To thank all of our loyal customers, we’re inviting you
+                  to enter our giveaway for!.</a>
+              </p>
+            </div>
+            <div class="aside__condition">
+              <div class="aside_condition-time"><time>9:49 AM</time></div>
+              <div class="aside__condition-seen">
+                <span class="aside__quantity-msg">2+</span>
+              </div>
+            </div>
+          </section>
+          <section class="aside__message-box flex transition">
+            <div class="profile-block flex">
+              <div class="hidden">
+                <img src=" /static/assets/images/Avatar/3.jpg" alt="" />
+              </div>
+            </div>
+            <div class="aside__details">
+              <h3 class="aside__details-name">
+                <strong><a href="/tutorial" class="tutorial-target" id="loki-link">Loki</a></strong>
+              </h3>
+              <p class="aside__details-msg hidden notif">
+                You have chosen to output of all future messages from
+              </p>
+            </div>
+            <div class="aside__condition">
+              <div class="aside_condition-time"><time>9:01 AM</time></div>
+              <div class="aside__condition-seen">
+                <span class="aside__quantity-msg">1+</span>
+              </div>
+            </div>
+          </section>
+        </main>
+      </section>
+      <section class="message d-flex">
+        <header class="title-bar">
+          <section class="flex">
+            <div class="title-bar__user flex">
+              <div class="profile-block">
+                <div class="hidden">
+                  <img src="/static/assets/images/Avatar/Pi7_Tool_iron-man-marvel-comics-.jpg" alt="" />
+                </div>
+              </div>
+              <div class="title-bar__user-info">
+                <h3 class="title-bar__name">
+                  <strong>Iron Man</strong>
+                </h3>
+                <p class="title-bar__last-seen">Last seen today at 9:12 am</p>
+              </div>
+            </div>
+            <div class="title-bar__actions flex">
+              <div class="material-icons material-symbols-rounded">
+                search
+              </div>
+              <div class="material-icons material-symbols-rounded">
+                drag_indicator
+              </div>
+            </div>
+          </section>
+        </header>
+        <main class="message-list">
+          <section class="message-list__declaration text-aline">
+            <div class="message-list__declaration--date">yesterday</div>
+            <div class="message-list__declaration--lock chat-shadow">
+              <span class="material-icons material-symbols-rounded" style="vertical-align: -1px">
+                lock
+              </span>
+              Messages are end-to-end encrypted. No one outside of this chat,
+              not even WhatsApp, can read or listen to them. Click to learn
+              more.
+            </div>
+          </section>
+          <section class="message-list__chat-box">
+            <section class="chat-box right">
+              <div class="chat-box__container chat-shadow">
+                <p class="chat-box__text">
+                  Hello How are You
+                  did you apply for scholarship.
+                  if you hve link send me.
+                </p>
+                <p class="chat-box__date"><time>7:45 AM</time></p>
+              </div>
+            </section>
+
+            <section class="chat-box left">
+              <div class="chat-box__container chat-shadow">
+                <p class="chat-box__text">
+                  Apply For ScholarShip
+                </p>
+
+                <p class="chat-box__date"><time>7:45 AM</time></p>
+              </div>
+            </section>
+            <section class="chat-box left">
+              <div class="chat-box__container chat-shadow">
+                <p class="chat-box__text link">
+                  <a href="Level-2/index.html" class="tutorial-target" id="scholarship-link"
+                    style="color: blue;">https://scholarship.com</a>
+                </p>
+
+                <p class="chat-box__date"><time>7:45 AM</time></p>
+              </div>
+            </section>
+          </section>
+        </main>
+        <footer class="message-content">
+          <section class="flex">
+            <div class="message-content__actions flex">
+              <div class="material-icons material-symbols-rounded">mood</div>
+              <div class="material-icons material-symbols-rounded">
+                attach_file
+              </div>
+            </div>
+            <div class="message-content__input-container">
+              <input class="message-content__input" type="text" placeholder="Type a message" />
+            </div>
+            <div class="message-content__voice-icon">
+              <div class="material-icons material-symbols-rounded">mic</div>
+            </div>
+          </section>
+        </footer>
+      </section>
+    </div>
+  </div>
+
+  <div class="tutorial-box" id="tutorial-box">
+    <h2>How to Play</h2>
+    <p id="tutorial-text"></p>
+    <button id="next-button" class="button">Next</button>
+  </div>
+  <!-- Modal -->
+  <div id="warningModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Warning</h2>
+      <p>You are about to visit an external link. Proceed with caution!</p>
+      <button id="continue-button" class="button">Continue</button>
+    </div>
+  </div>
+
+  <script>
+    const tutorialBox = document.getElementById('tutorial-box');
+    const tutorialText = document.getElementById('tutorial-text');
+    const warningModal = document.getElementById('warningModal');
+    const nextButton = document.getElementById('next-button');
+    const closeModal = document.getElementsByClassName('close')[0];
+    const continueButton = document.getElementById('continue-button');
+
+    let step = 0;
+
+    function showTutorial() {
+      tutorialBox.style.display = 'block';
+      updateTutorial();
+    }
+
+    function updateTutorial() {
+      if (step === 0) {
+        tutorialText.innerText = "Welcome! Let's start with Iron Man's profile.";
+        const ironmanLink = document.getElementById('ironman-link');
+        const rect = ironmanLink.getBoundingClientRect();
+        tutorialBox.style.top = (rect.top - tutorialBox.offsetHeight - 10) + 'px';
+        tutorialBox.style.left = (rect.left + (ironmanLink.offsetWidth / 2) - (tutorialBox.offsetWidth / 2)) + 'px';
+        ironmanLink.classList.add('highlight');
+      } else if (step === 1) {
+        tutorialText.innerText = "Now, click on the link in the chat to see more.";
+        const scholarshipLink = document.getElementById('scholarship-link');
+        const rect = scholarshipLink.getBoundingClientRect();
+        tutorialBox.style.top = (rect.top - tutorialBox.offsetHeight - 10) + 'px';
+        tutorialBox.style.left = (rect.left + (scholarshipLink.offsetWidth / 2) - (tutorialBox.offsetWidth / 2)) + 'px';
+        scholarshipLink.classList.add('highlight');
+      } else {
+        tutorialBox.style.display = 'none';
+        removeHighlights();
+      }
+      step++;
+    }
+
+    function removeHighlights() {
+      document.getElementById('ironman-link').classList.remove('highlight');
+      document.getElementById('scholarship-link').classList.remove('highlight');
+    }
+
+    nextButton.addEventListener('click', updateTutorial);
+
+    // Show warning modal when scholarship link is clicked
+    document.getElementById('scholarship-link').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      warningModal.style.display = 'block'; // Show modal
+    });
+
+    // Close the modal when the close button is clicked
+    closeModal.onclick = function() {
+      warningModal.style.display = 'none';
+    }
+
+    // Redirect to the scholarship link when continue button is clicked
+    continueButton.onclick = function() {
+      window.location.href = "./Level-2/index.html"; // Change this to the actual link if needed
+    }
+
+    // Start the tutorial when the page loads
+    window.onload = showTutorial;
+
+    // Close modal when clicking outside of the modal
+    window.onclick = function(event) {
+      if (event.target == warningModal) {
+        warningModal.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+
+</html>

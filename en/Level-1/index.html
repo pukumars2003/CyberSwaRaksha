@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phishing</title>
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One|Patrick+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <div id="game-container">
+        <h1 id="start-title">Phishing</h1>
+        <div id="info-wrapper">
+            <div id="instructions"></div>
+            <audio id="intro-audio" src="Phishing-Intro English.mp3"></audio>
+            <button id="start-btn"><span class="arrow"></span>Game Start</button>
+        </div>
+        <div id="game-stats">
+            <span id="game-day">Day 1</span>
+
+            <div id="clock">
+                <svg viewBox="0 0 120 120" class="chart-gauge" fill="none" stroke-width="4">
+                    <circle class="timer-backdrop" r="40" cx="60" cy="60"></circle>
+                    <circle class="timer-gauge" r="40" cx="60" cy="60"></circle>
+                    <text y="50%" x="50%" id="game-timer" class="timer-time">15s</text>
+                </svg>
+            </div>
+            <span id="game-score">Total Score: 0</span>
+        </div>
+        <p id="game-goal"></p>
+    </div>
+    <div id="click-container">
+        <span id="line"></span>
+    </div>
+    <div id="bubbles"></div>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script>
+        
+        const startButton = document.getElementById('start-btn');
+        const timerDisplay = document.getElementById('game-timer');
+        const infoWrapper = document.getElementById('info-wrapper');
+        const startTitle = document.getElementById('start-title');
+        const clickContainer = document.getElementById('click-container');
+        const gameStats = document.getElementById('game-stats');
+        const gameGoal = document.getElementById('game-goal');
+
+        startButton.addEventListener('click', function() {
+            
+            let timeLeft = 2;
+            timerDisplay.textContent = `${timeLeft}s`;
+
+            const timerInterval = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = `${timeLeft}s`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    startGame(); // Call the startGame function when timer ends
+                }
+            }, 1000);
+
+            // Optionally hide the button or do other UI updates
+            startButton.style.display = "none"; 
+        });
+    </script>
+</body>
+</html>
+</body>
+</html>

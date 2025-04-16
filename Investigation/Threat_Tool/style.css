@@ -1,0 +1,118 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin: 40px 0;
+    font-weight: 600;
+    color: #333;
+    font-size: 2.5rem;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.input-container input,
+.input-container select {
+    padding: 15px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-container input:focus,
+.input-container select:focus {
+    box-shadow: 0 0 12px rgba(0, 115, 255, 0.5);
+}
+
+.input-container button {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    background: linear-gradient(90deg, #4CAF50, #38a1d1);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.input-container button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #38a1d1, #4CAF50);
+}
+
+.loader {
+    display: none;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+/* Table Styling */
+table {
+    width: 80%;
+    margin: 40px auto;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+th {
+    background-color: #f8f8f8;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+td {
+    font-size: 1rem;
+}
+
+/* Hover effect for rows */
+tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .input-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input-container input,
+    .input-container select,
+    .input-container button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}

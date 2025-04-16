@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrollbars */
+    font-family: Arial, sans-serif;
+}
+
+video {
+    position: fixed; /* Make the video fill the screen */
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1; /* Send video to the background */
+    transform: translate(-50%, -50%); /* Center the video */
+}
+
+.container {
+    position: relative; /* Make the container position relative */
+    z-index: 1; /* Ensure it is above the video */
+    color: limegreen; /* Your text color */
+    text-align: center;
+    padding: 10px; /* Reduced padding */
+    max-width: 90%; /* Ensure it fits on smaller screens */
+    margin: 0 auto; /* Center the container */
+}
+
+h1 {
+    font-size: 2.5em;
+    margin: 10px 0; /* Reduced margin */
+}
+
+.scoreboard {
+    background-color: rgba(0, 255, 0, 0.5);
+    padding: 10px; /* Reduced padding */
+    border: 2px solid limegreen;
+    border-radius: 10px;
+    margin-bottom: 20px; /* Reduced margin */
+}
+
+.level-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
+    gap: 10px; /* Reduced gap */
+    justify-items: center; /* Center items within each grid cell */
+}
+
+.level {
+    background-color: rgba(0, 255, 0, 0.3);
+    border: 2px solid limegreen;
+    border-radius: 10px;
+    width: 200px; /* Fixed width for level boxes */
+    height: 150px; /* Fixed height for level boxes */
+    display: flex; /* Use flexbox to center content */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+    padding: 10px; /* Padding inside the box */
+    text-align: center; /* Center text inside */
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.level:hover {
+    transform: scale(1.05);
+    background-color: rgba(0, 255, 0, 0.5);
+}
+
+h2 {
+    font-size: 1.5em; /* Adjust title size for levels */
+    margin: 5px 0; /* Added margin for spacing */
+}
+
+button {
+    background-color: limegreen;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px; /* Adjusted padding */
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: darkgreen;
+}
+
+.status {
+    display: block;
+    margin-top: 5px; /* Reduced margin */
+    font-size: 1.1em; /* Slightly smaller */
+    color: gold;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 1200px) {
+    h1 {
+        font-size: 2.2em; /* Slightly smaller on medium devices */
+    }
+}
+
+@media (max-width: 900px) {
+    h1 {
+        font-size: 2em; /* Smaller for tablets */
+    }
+    h2 {
+        font-size: 1.3em; /* Smaller for level titles */
+    }
+    button {
+        padding: 6px 10px; /* Smaller button size */
+        font-size: 0.9em; /* Smaller font for buttons */
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8em; /* Smaller for mobile */
+    }
+    h2 {
+        font-size: 1.2em; /* Adjust level title size */
+    }
+    button {
+        padding: 5px 8px; /* Even smaller button size */
+        font-size: 0.8em; /* Smaller font for buttons */
+    }
+}

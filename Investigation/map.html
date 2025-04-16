@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Geolocation Finder</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* Ensure full viewport height */
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+            /* Pushes footer to the bottom of the page */
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            margin-top: 50px;
+            padding: 20px;
+            flex-grow: 1;
+            /* Allows the container to fill available space */
+        }
+
+        /* Input Box Centering */
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .search-box h2 {
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .search-box input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .search-box button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-box button:hover {
+            background-color: #45a049;
+        }
+
+        /* Table Styling */
+        .info-table {
+            width: 100%;
+            max-width: 450px;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .info-table th,
+        .info-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Domains List Styling */
+        .domain-list {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .domain-list h3 {
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+
+        .domain-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .domain-list li {
+            padding: 5px 0;
+            word-wrap: break-word;
+        }
+
+        /* Map Container */
+        .map-container {
+            height: 100%;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Two-Column Layout for Table and Map */
+        .results {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .results .map,
+        .results .table {
+            flex: 1;
+            height: 350px;
+            /* Adjusted to make them of equal size */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .results {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .results .map,
+            .results .table {
+                width: 80%;
+                margin-bottom: 30px;
+                height: 250px;
+                /* Adjust height for small screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        IP Geolocation Finder
+    </header>
+
+    <div class="container">
+        <div class="search-box">
+            <h2>Enter IP Address:</h2>
+            <input type="text" id="ipInput" placeholder="e.g. 8.8.8.8">
+            <button onclick="searchIP()">Search</button>
+        </div>
+
+        <div class="results">
+            <div class="table">
+                <table class="info-table" id="infoTable" style="display:none;">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>IP Address</td>
+                            <td id="ipAddress"></td>
+                        </tr>
+                        <tr>
+                            <td>Country</td>
+                            <td id="country"></td>
+                        </tr>
+                        <tr>
+                            <td>Region</td>
+                            <td id="region"></td>
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td id="city"></td>
+                        </tr>
+                        <tr>
+                            <td>ISP</td>
+                            <td id="isp"></td>
+                        </tr>
+                        <tr>
+                            <td>Latitude</td>
+                            <td id="latitude"></td>
+                        </tr>
+                        <tr>
+                            <td>Longitude</td>
+                            <td id="longitude"></td>
+                        </tr>
+                        <tr>
+                            <td id="domainList">Domains</td>
+                            <td id="domains"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!--<div id="domainList" class="domain-list" style="display:none;">
+                    <h3>Associated Domains:</h3>
+                    <ul id="domains"></ul>
+                </div>-->
+            </div>
+
+            <div class="map">
+                <div id="map" class="map-container"></div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        Powered by IP Geolocation API
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        function searchIP() {
+            const ipAddress = document.getElementById("ipInput").value.trim();
+            if (ipAddress === "") {
+                alert("Please enter a valid IP address");
+                return;
+            }
+
+            const apiKey = 'at_zBTo7kguf8QBEcZqBahVk0PiFBbk7';  // Your API key
+            const url = `https://ip-geolocation.whoisxmlapi.com/api/v1?apiKey=${apiKey}&ipAddress=${ipAddress}`;
+
+            $.getJSON(url, function (data) {
+                if (data && data.location) {
+                    // Extract necessary details
+                    const { lat, lng, country, region, city, isp } = data.location;
+
+                    // Update the table with IP information
+                    document.getElementById("ipAddress").innerText = data.ip;
+                    document.getElementById("country").innerText = country;
+                    document.getElementById("region").innerText = region;
+                    document.getElementById("city").innerText = city;
+                    document.getElementById("isp").innerText = isp;
+                    document.getElementById("latitude").innerText = lat;
+                    document.getElementById("longitude").innerText = lng;
+
+                    // Show the table
+                    document.getElementById("infoTable").style.display = "table";
+
+                    // Show domains if they exist
+                    const domains = data.domains || [];
+                    const domainListElement = document.getElementById("domains");
+                    domainListElement.innerHTML = "";  // Clear existing domains
+                    if (domains.length > 0) {
+                        domains.forEach(function (domain) {
+                            const li = document.createElement("li");
+                            li.textContent = domain;
+                            domainListElement.appendChild(li);
+                        });
+                        document.getElementById("domainList").style.display = "block";
+                    } else {
+                        document.getElementById("domainList").style.display = "none";
+                    }
+
+                    // Initialize the map
+                    const map = L.map('map').setView([lat, lng], 10);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+
+                    L.marker([lat, lng]).addTo(map)
+                        .bindPopup(`<b>${city}</b><br>${country}`)
+                        .openPopup();
+                } else {
+                    alert('Unable to fetch data for the provided IP address.');
+                }
+            }).fail(function () {
+                alert('Failed to fetch data.');
+            });
+        }
+    </script>
+
+</body>
+
+</html>

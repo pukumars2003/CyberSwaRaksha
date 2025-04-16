@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Investigation Tools</title>
+  <!-- Bootstrap CSS -->
+
+  <link href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header using Bootstrap Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">IP Geolocation Finder</a>
+    </div>
+  </nav>
+  <div class="container">
+    <!-- Header Section -->
+    <div class="header">
+      Investigation Tools
+    </div>
+
+    <!-- Input Form Section -->
+    <div class="input-container">
+      <form id="investigationForm">
+        <div class="mb-3">
+          <label for="inputField" class="form-label">Enter IP Address or Domain:</label>
+          <input type="text" class="form-control" id="inputField" placeholder="e.g., 8.8.8.8">
+        </div>
+        <button type="submit" class="btn btn-primary">Investigate</button>
+      </form>
+      <div class="loading" id="loadingMessage" style="display: none;">
+        <p>Loading...</p>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="result-box" id="resultBox">
+      <h5>Results:</h5>
+      <div class="table-container">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody id="resultTableBody">
+            <!-- Results will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>&copy; 2024 Investigation Tools - All rights reserved</p>
+  </div>
+
+  <!-- Bootstrap JS & Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+  <script src="script.js">
+
+  </script>
+</body>
+
+</html>
