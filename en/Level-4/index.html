@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Stocks</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<style>
+		.tutorial-box {
+			position: fixed;
+			/* Keep it within the viewport */
+			background-color: rgb(255, 255, 255);
+			color: rgb(0, 0, 0);
+			padding: 15px;
+			border-radius: 8px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+			max-width: 90%;
+			/* Responsive max width */
+			width: auto;
+			/* Allow width to adjust */
+			display: none;
+			/* Hidden by default */
+			z-index: 1000;
+			/* Ensure it's on top */
+			text-align: center;
+			left: 60%;
+			/* Center the box horizontally */
+			top: 20vh;
+			/* Use vh for vertical positioning */
+			transform: translate(-50%, 0);
+			/* Adjust for horizontal centering */
+		}
+
+		/* Styles for smaller screens */
+		@media (max-width: 768px) {
+			.tutorial-box {
+				top: 50vh;
+				/* Adjust for tablets */
+				padding: 10px;
+				width: auto;
+				/* Allow width to adjust */
+				display: none;
+				/* Hidden by default */
+				
+				/* Ensure it's on top */
+				text-align: center;
+				left: 90%;
+				/* Center the box horizontally */
+				top: 20vh;
+				/* Use vh for vertical positioning */
+				transform: translate(-50%, 0);
+				/* Reduce padding */
+			}
+		}
+
+		@media (max-width: 480px) {
+			.tutorial-box {
+				top: 10vh;
+				/* Adjust for mobile */
+				padding: 8px;
+				/* Further reduce padding */
+				max-width: 95%;
+				/* Allow more width */
+			}
+		}
+
+		.button {
+			display: inline-block;
+			margin-top: 10px;
+			padding: 10px 15px;
+			background-color: #007bff;
+			color: white;
+			text-decoration: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.highlight {
+			border: 2px solid yellow;
+			background-color: rgba(255, 255, 0, 0.2);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="container">
+					<div class="portfolio-header">
+						<div class="row">
+							<div class="col-md-4">
+								<h4>Portfolio + Cash Flow: <span id="netWorth" class="portfolio-value">10000</span></h4>
+							</div>
+							<div class="col-md-4">
+								<h4>Cash Flow: <span id="cashflow" class="portfolio-value">10000</span></h4>
+							</div>
+							<div class="col-md-4">
+								<h4>Portfolio Value: <span id="portfolio" class="portfolio-value">0</span></h4>
+							</div>
+						</div>
+					</div>
+
+					<div class="table-container">
+						<h3 class="tutorial-target" id="ironman-link">Watch List</h3>
+						<table id="myPortfolio" class="table table-bordered">
+							<thead>
+								<tr class="table100-head">
+									<th class="column1">Company</th>
+									<th class="column2">Ticker</th>
+									<th class="column3">Price</th>
+									<th class="column4">Shares</th>
+									<th class="column5 tutorial-target" id="scholarship-link">Buy</th>
+									<th class="column6">Sell</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+						<p class="tutorial-target" id="buy-link"></p>
+						<p class="tutorial-target" id="sell-link"></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="profitModal" tabindex="-1" role="dialog" aria-labelledby="profitModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="profitModalLabel">Result</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<span id="profitMessage"></span> <span id="profitAmount"></span>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="tutorial-box" id="tutorial-box">
+		<h2>How to Play</h2>
+		<p id="tutorial-text"></p>
+		<button id="next-button" class="button">Next</button>
+	</div>
+
+	<audio id="tutorial-audio" style="display:none;"></audio>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/stocks.js"></script>
+
+	<script>
+		const tutorialBox = document.getElementById('tutorial-box');
+		const tutorialText = document.getElementById('tutorial-text');
+		const nextButton = document.getElementById('next-button');
+		const audioElement = document.getElementById('tutorial-audio');
+
+		const audioFiles = [
+			"./audio/step1 English.mp3",
+			"./audio/step2 English.mp3",
+			"./audio/step3 English.mp3",
+			"./audio/step4 English.mp3"
+		];
+
+		let step = 0;
+
+		function showTutorial() {
+			tutorialBox.style.display = 'block';
+			updateTutorial(); // Set the tutorial text and highlight
+		}
+
+		function updateTutorial() {
+			if (step < audioFiles.length) {
+				tutorialText.innerText = getTutorialText(step);
+				highlightElement(getElementId(step));
+			} else {
+				tutorialBox.style.display = 'none';
+				removeHighlights();
+				return;
+			}
+		}
+
+		function getTutorialText(step) {
+			switch (step) {
+				case 0: return "Hello! Now you will learn how a fake stock market scam works.";
+				case 1: return "Now click on the blue 'Buy 1 Share' for the Apple company. After some time, click on the blue button that says 'Sell 1 Share.";
+				case 2: return "Now click on the blue 'Buy 1 Share' for the last 3 companies. After some time, if it shows that your money or portfolio value is decreasing, click on the blue button that says 'Sell 1 Share.'";
+				case 3: return "Learn how to stay away from such scams.";
+				default: return "";
+			}
+		}
+
+		function getElementId(step) {
+			switch (step) {
+				case 0: return 'ironman-link';
+				case 1: return 'scholarship-link';
+				case 2: return 'buy-link';
+				case 3: return 'sell-link';
+				default: return '';
+			}
+		}
+
+		function highlightElement(elementId) {
+			const element = document.getElementById(elementId);
+			const rect = element.getBoundingClientRect();
+			const tutorialBoxHeight = tutorialBox.offsetHeight;
+
+			// Calculate the top position, ensuring it doesn't go off the screen
+			let topPosition = rect.top - tutorialBoxHeight - 10; // Above the highlighted element
+			if (topPosition < 0) {
+				topPosition = rect.bottom + 10; // Below the element if it goes off-screen
+			}
+
+			tutorialBox.style.top = topPosition + 'px';
+			tutorialBox.style.left = (rect.left + (element.offsetWidth / 2) - (tutorialBox.offsetWidth / 2)) + 'px';
+
+			// Check if the box goes off the right side of the viewport
+			if (parseInt(tutorialBox.style.left) + tutorialBox.offsetWidth > window.innerWidth) {
+				tutorialBox.style.left = (window.innerWidth - tutorialBox.offsetWidth - 10) + 'px'; // Align it to the right
+			}
+		}
+
+		function removeHighlights() {
+			['ironman-link', 'scholarship-link', 'buy-link', 'sell-link'].forEach(id => {
+				document.getElementById(id).classList.remove('highlight');
+			});
+		}
+
+		function playAudio() {
+			if (step < audioFiles.length) {
+				audioElement.src = audioFiles[step]; // Set the audio source
+				audioElement.currentTime = 0; // Reset audio to start
+				audioElement.play();
+				nextButton.disabled = true; // Disable button until audio finishes
+
+				audioElement.onended = () => {
+					nextButton.disabled = false; // Enable button after audio ends
+					step++; // Move to the next step
+					updateTutorial(); // Update tutorial text and highlights
+				};
+			}
+		}
+
+		nextButton.addEventListener('click', playAudio);
+
+		// Start the tutorial when the page loads
+		window.onload = showTutorial;
+	</script>
+</body>
+
+</html>

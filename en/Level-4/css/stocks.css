@@ -1,0 +1,84 @@
+/* Style for the table */
+table#myPortfolio {
+    border-collapse: collapse;
+    width: 100%; /* Fill the container */
+    background-color: white; /* Table background color */
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+    color: #000000;
+}
+
+/* Table and cell borders */
+table, td {
+    border: 1px solid black;
+}
+
+/* Table cell padding */
+#myPortfolio td {
+    padding: 12px;
+    background-color: white; /* Cell background color */
+    word-wrap: break-word; /* Break long words */
+}
+
+/* Table header styling */
+#myPortfolio th {
+    padding: 12px; /* Consistent padding */
+    background-color: white; /* Header background color */
+}
+
+/* Styling the share price */
+.price {
+    color: #006400;
+}
+
+/* Buy and sell buttons */
+a {
+    /* Button Styles */
+    display: block;
+    height: 25px;
+    width: 100px;
+    border: 2px solid #000000;
+
+    /* Text Styles */
+    color: #FFFFFF;
+    text-align: center;
+    font: bold 12px;
+    line-height: 25px;
+
+    /* Link Styles */
+    text-decoration: none;
+    transition: background 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Mouse over any link (buy and sell buttons) */
+a:hover {
+    background: #fffdfd;
+}
+
+/* Mouse over buy button */
+a.buy {
+    background: #009900;
+}
+
+/* Mouse over sell button */
+a.sell {
+    background: #FF0000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #myPortfolio th, #myPortfolio td {
+        font-size: 12px; /* Smaller font size on mobile */
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+
+    a {
+        width: auto; /* Let buttons take the width they need */
+        font-size: 10px; /* Smaller text size for buttons */
+    }
+
+    table {
+        display: block; /* Allows table to scroll */
+        overflow-x: auto; /* Enable horizontal scroll for small screens */
+        white-space: nowrap; /* Prevent table contents from wrapping */
+    }
+}
