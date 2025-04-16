@@ -110,3 +110,4 @@ function createParticles() {
         particlesContainer.appendChild(particle);
     }
 }
+
